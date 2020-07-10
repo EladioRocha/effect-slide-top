@@ -57,7 +57,7 @@
     }
 
     function init() {
-        // setInterval(updateSectionSlides, SLIDE_TIME)
+        setInterval(updateSectionSlides, SLIDE_TIME)
         document.addEventListener('transitionend', restartSectionSlides)
     }
 
