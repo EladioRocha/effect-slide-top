@@ -1,26 +1,34 @@
-# effect-slide-top
+# Full-Screen Slide-Up Effect
 
-Demostración de un efecto visual de desplazamiento hecha con HTML, CSS y JavaScript. El ejemplo está en `index.html`, `index.js` y `style.css`.
+A minimal **HTML, CSS, and JavaScript animation** that cycles full-screen panels upward. It uses CSS transitions and a small DOM queue rather than a slideshow framework.
 
-## Estructura
+## Run locally
 
-- [index.html](index.html)
-- [index.js](index.js)
-
-## Preparación y uso
-
-Sirve la raíz con un servidor estático; por ejemplo, si tienes Python 3:
+From the repository root, use Python 3 to start a static server:
 
 ```sh
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Abre `http://127.0.0.1:8000/` y navega al ejemplo:
+Open `http://127.0.0.1:8000` in a browser. No npm installation or build step is required to view the checked-in example. Stop the server with `Ctrl+C`.
 
-- [index.html](index.html)
+## How it works
 
-Los recursos cargados desde servicios externos requieren conexión. La comprobación local debe incluir la consola del navegador y la carga de imágenes, scripts y estilos.
+1. `index.js` starts a timer with `SLIDE_TIME = 2000` milliseconds.
+2. The first and second panels receive transition classes.
+3. A new numbered panel is appended when the queue needs one.
+4. The `transitionend` handler removes the outgoing panel and resets the next panel's classes.
 
-## Validación y estado
+The animation starts automatically; the example does not expose manual navigation or pause controls.
 
-Esta guía se contrastó con el árbol de archivos y los manifiestos del repositorio. No se ha validado una ejecución completa contra servicios externos, bases de datos o hardware. Las versiones y los scripts mostrados describen el código actual; no implican que sus dependencias antiguas sigan siendo compatibles.
+## Customize
+
+- [index.html](index.html): initial panels and page structure.
+- [style.css](style.css): panel appearance, transforms, and transition duration.
+- [index.js](index.js): timer interval, generated panel text, and queue lifecycle.
+
+Keep the CSS transition duration compatible with the JavaScript timer. The selectors target generic `div` elements, so adding unrelated divs can affect slide selection and queue counting.
+
+## Verification
+
+There is no build system or automated test suite. `node --check index.js` checks JavaScript syntax. When changing the effect, observe several cycles, check browser errors, and confirm outgoing panels are removed rather than accumulating. A production component would also need pause and reduced-motion handling.
